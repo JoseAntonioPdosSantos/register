@@ -96,7 +96,6 @@ RESPONSE: HTTP 201 (Created)
     "email": "email_user@mail.com",
     "cellphone": "99999999999",
     "username": "username_user",
-    "password": "password_user"
 }
 ```
 
@@ -123,7 +122,6 @@ RESPONSE: HTTP 200 (OK)
     "email": "email_user@mail.com",
     "cellphone": "99999999999",
     "username": "username_user",
-    "password": "password_user"
 }
 ```
 ## Find All
@@ -142,7 +140,6 @@ RESPONSE: HTTP 200 (OK)
     "email": "email_user@mail.com",
     "cellphone": "99999999999",
     "username": "username_user",
-    "password": "password_user"
     }
 ]
 ```
@@ -161,7 +158,6 @@ RESPONSE: HTTP 200 (OK)
     "email": "email_user@mail.com",
     "cellphone": "99999999999",
     "username": "username_user",
-    "password": "password_user"
 }
 ```
 ## Delete by id
