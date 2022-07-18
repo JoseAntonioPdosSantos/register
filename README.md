@@ -17,6 +17,7 @@ A simple user CRUD
 - [x] Integration tests
 - [x] Junit
 - [x] Mockito
+- [x] JaCoco
 - [x] Swagger
 - [x] SOLID Principle
 
