@@ -74,3 +74,5 @@ swagger:
       name: GSB
       url: GSB
       email: gsb@gsb.com.br
+    license: MIT
+    licenseUrl: some.url.com.br

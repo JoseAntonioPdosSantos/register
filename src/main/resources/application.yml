@@ -37,7 +37,7 @@ security-api:
     subject: register
 
 swagger:
-  path_api_scan: com.lat.gsb.register.controller
+  path_api_scan: com.lat.gsb.register
   info:
     title: Register API
     description: Register Flow API
@@ -47,3 +47,5 @@ swagger:
       name: GSB
       url: GSB
       email: gsb@gsb.com.br
+    license: MIT
+    licenseUrl: some.url.com.br
