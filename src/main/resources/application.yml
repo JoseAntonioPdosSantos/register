@@ -1,0 +1,49 @@
+server:
+  port: ${APP_PORT:8088}
+spring:
+  application:
+    name: register
+  datasource:
+    url: jdbc:h2:mem:register-db;MODE=PostgreSQL
+    username: sa
+    password: password
+  jpa:
+    properties:
+      hibernate:
+        show_sql: false
+      dialect: org.hibernate.dialect.PostgreSQLDialect
+      javax.persistence.schema-generation:
+        database.action: drop-and-create
+        create-database-schemas: true
+        create-source: metadata
+        drop-source: metadata
+    database-platform: org.hibernate.dialect.H2Dialect
+    defer-datasource-initialization: true
+  h2:
+    console:
+      path: /h2-console
+      enabled: true
+
+security-api:
+  security:
+    username: ${SECURITY_USERNAME:register_user_api}
+    password: ${SECURITY_PASSWORD:7cb52be9497efe44a5a1899485fdd24f6b0f468da4024994c701be3229f3473c}
+    path: ${SECURITY_AUTH_PATH:/auth}
+  jwt:
+    authorization_header: ${SECURITY_HEADER_TOKEN:Authorization}
+    prefix_token: ${SECURITY_PREFIX_TOKEN:Bearer}
+    secret: ${SECURITY_SECRET:7cb52be9497efe44a5a1899485fdd24f6b0f468da4024994c701be3229f3473c}
+    expirationInMs: ${SECURITY_TOKEN_EXPIRATION_IN_MS:300000}
+    subject: register
+
+swagger:
+  path_api_scan: com.lat.gsb.register.controller
+  info:
+    title: Register API
+    description: Register Flow API
+    version: '@project.version@'
+    termsOfServiceUrl: GSB
+    contact:
+      name: GSB
+      url: GSB
+      email: gsb@gsb.com.br
