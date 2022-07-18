@@ -1,4 +1,4 @@
-package com.lat.gsb.register.util;
+package com.lat.gsb.register.handle.util;
 
 import lombok.SneakyThrows;
 
