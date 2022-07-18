@@ -1,6 +1,7 @@
 package com.lat.gsb.register.controller.interf;
 
 import com.lat.gsb.register.dto.user.UserDTO;
+import com.lat.gsb.register.dto.user.UserRequestDTO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -21,7 +22,7 @@ public interface UserController {
         @ApiResponse(code = 500, message = "Internal server error.",
             response = HttpClientErrorException.BadRequest.class)
     })
-    ResponseEntity<UserDTO> save(UserDTO userDTO);
+    ResponseEntity<UserDTO> save(UserRequestDTO userDTO);
 
     @ApiOperation("Update user")
     @ApiResponses({
@@ -31,7 +32,7 @@ public interface UserController {
         @ApiResponse(code = 500, message = "Internal server error.",
             response = HttpClientErrorException.BadRequest.class)
     })
-    ResponseEntity<UserDTO> update(Long id, UserDTO userDTO);
+    ResponseEntity<UserDTO> update(Long id, UserRequestDTO userDTO);
 
     @ApiOperation("Find all users")
     @ApiResponses({

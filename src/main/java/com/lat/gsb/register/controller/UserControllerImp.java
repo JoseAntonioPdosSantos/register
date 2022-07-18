@@ -2,6 +2,7 @@ package com.lat.gsb.register.controller;
 
 import com.lat.gsb.register.controller.interf.UserController;
 import com.lat.gsb.register.dto.user.UserDTO;
+import com.lat.gsb.register.dto.user.UserRequestDTO;
 import com.lat.gsb.register.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +23,7 @@ public class UserControllerImp implements UserController {
 
     @PostMapping
     @Override
-    public ResponseEntity<UserDTO> save(@RequestBody @Valid UserDTO userDTO) {
+    public ResponseEntity<UserDTO> save(@RequestBody @Valid UserRequestDTO userDTO) {
         return ResponseEntity.status(CREATED).body(service.create(userDTO));
     }
 
@@ -30,7 +31,7 @@ public class UserControllerImp implements UserController {
     @Override
     public ResponseEntity<UserDTO> update(
         @PathVariable(value = "id") @Valid Long id,
-        @RequestBody @Valid UserDTO userDTO
+        @RequestBody @Valid UserRequestDTO userDTO
     ) {
         return ResponseEntity.ok(service.update(id, userDTO));
     }

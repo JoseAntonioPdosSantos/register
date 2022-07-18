@@ -1,17 +1,17 @@
 package com.lat.gsb.register.mapper;
 
-import com.lat.gsb.register.dto.user.UserDTO;
+import com.lat.gsb.register.dto.user.UserRequestDTO;
 import com.lat.gsb.register.model.User;
 import org.mapstruct.Mapper;
 
 import java.util.List;
 
 @Mapper(componentModel = "spring")
-public interface UserMapper {
+public interface UserRequestMapper {
 
-    User map(UserDTO value);
+    User map(UserRequestDTO value);
 
-    UserDTO map(User value);
+    UserRequestDTO map(User value);
 
-    List<UserDTO> map(List<User> values);
+    List<UserRequestDTO> map(List<User> values);
 }

@@ -1,10 +1,12 @@
 package com.lat.gsb.register.service;
 
 import com.lat.gsb.register.dto.user.UserDTO;
+import com.lat.gsb.register.dto.user.UserRequestDTO;
 import com.lat.gsb.register.exception.user.MoreThanOneUserWasFoundException;
 import com.lat.gsb.register.exception.user.UserNotFoundException;
 import com.lat.gsb.register.exception.user.UserUnexpectedErrorException;
 import com.lat.gsb.register.mapper.UserMapper;
+import com.lat.gsb.register.mapper.UserRequestMapper;
 import com.lat.gsb.register.model.User;
 import com.lat.gsb.register.repository.UserRepository;
 import com.lat.gsb.register.util.CriptUtil;
@@ -21,11 +23,13 @@ public class UserService {
 
     private final UserRepository repository;
     private final UserMapper mapper;
+    private final UserRequestMapper userRequestMapper;
 
-    public UserDTO create(UserDTO dao) {
+
+    public UserDTO create(UserRequestDTO dao) {
         try {
             dao.setId(null);
-            var user = mapper.map(dao);
+            var user = userRequestMapper.map(dao);
             user.setPassword(CriptUtil.encript(user.getPassword()));
             return mapper.map(repository.save(user));
         } catch (Throwable e) {
@@ -34,10 +38,10 @@ public class UserService {
         }
     }
 
-    public UserDTO update(Long id, UserDTO dao) {
+    public UserDTO update(Long id, UserRequestDTO dao) {
         try {
             findEntityById(id);
-            var userUpdated = mapper.map(dao);
+            var userUpdated = userRequestMapper.map(dao);
             userUpdated.setId(id);
             if (userUpdated.getPassword() != null) {
                 userUpdated.setPassword(CriptUtil.encript(userUpdated.getPassword()));
