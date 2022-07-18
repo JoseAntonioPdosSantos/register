@@ -32,6 +32,10 @@ public class SwaggerConfig {
     private String contactUrl;
     @Value("${swagger.info.contact.email}")
     private String contactEmail;
+    @Value("${swagger.info.license}")
+    private String license;
+    @Value("${swagger.info.licenseUrl}")
+    private String licenseUrl;
 
     @Value("${swagger.path_api_scan}")
     private String pathApiScan;
@@ -53,7 +57,7 @@ public class SwaggerConfig {
 
     private ApiInfo getApiInfo() {
         Contact contact = new Contact(contactName, contactUrl, contactEmail);
-        return new ApiInfo(title, description, version, termsOfServiceUrl, contact, "license", "licenseUrl",
+        return new ApiInfo(title, description, version, termsOfServiceUrl, contact, license, licenseUrl,
             Collections.emptyList());
     }
 

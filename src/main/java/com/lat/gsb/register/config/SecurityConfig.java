@@ -36,12 +36,14 @@ public class SecurityConfig {
             .sessionManagement()
             .sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
             .authorizeRequests()
-            .antMatchers("%s%s".formatted("/", securityPath)).permitAll()
-            .antMatchers("/v2/api-docs",
+            .antMatchers("%s%s".formatted("/", securityPath),
+                "/v2/api-docs",
                 "/configuration/ui",
                 "/swagger-resources/**",
+                "/javainuse-openapi/**",
                 "/configuration/security",
-                "/swagger-ui.html",
+                "z/swagger-ui.html",
+                "z/swagger-ui/**",
                 "/webjars/**",
                 "/actuator/**").permitAll()
             .anyRequest().authenticated().and()
