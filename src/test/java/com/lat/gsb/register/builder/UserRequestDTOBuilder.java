@@ -1,28 +1,30 @@
 package com.lat.gsb.register.builder;
 
-import com.lat.gsb.register.dto.user.UserDTO;
+import com.lat.gsb.register.dto.user.UserRequestDTO;
 
-public class UserDTOBuilder {
+public class UserRequestDTOBuilder {
 
-    private UserDTOBuilder() {
+    private UserRequestDTOBuilder() {
         throw new IllegalArgumentException();
     }
 
-    public static UserDTO builder(Long id) {
-        return UserDTO.builder()
+    public static UserRequestDTO builder(Long id) {
+        return UserRequestDTO.builder()
             .id(id)
             .name("Some name")
             .username("some username")
+            .password("some password")
             .email("some_email@valid.com")
             .cellphone("+5599999999999")
             .build();
     }
 
-    public static UserDTO builder() {
-        return UserDTO.builder()
+    public static UserRequestDTO builder() {
+        return UserRequestDTO.builder()
             .id(1L)
             .name("Some name")
             .username("some username")
+            .password("some password")
             .email("some_email@valid.com")
             .cellphone("+5599999999999")
             .build();

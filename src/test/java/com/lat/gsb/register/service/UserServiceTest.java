@@ -2,8 +2,9 @@ package com.lat.gsb.register.service;
 
 import com.lat.gsb.register.UnitTestConfig;
 import com.lat.gsb.register.builder.UserBuilder;
-import com.lat.gsb.register.builder.UserDTOBuilder;
+import com.lat.gsb.register.builder.UserRequestDTOBuilder;
 import com.lat.gsb.register.mapper.UserMapper;
+import com.lat.gsb.register.mapper.UserRequestMapper;
 import com.lat.gsb.register.model.User;
 import com.lat.gsb.register.repository.UserRepository;
 import com.lat.gsb.register.util.CriptUtil;
@@ -17,7 +18,8 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.*;
 
 class UserServiceTest extends UnitTestConfig {
@@ -28,25 +30,25 @@ class UserServiceTest extends UnitTestConfig {
     private UserRepository repository;
     @Spy
     private UserMapper mapper = Mappers.getMapper(UserMapper.class);
+    @Spy
+    private UserRequestMapper userRequestMapper = Mappers.getMapper(UserRequestMapper.class);
 
     @Test
     void create() {
         var user = UserBuilder.builder(1L);
         user.setPassword(CriptUtil.encript(user.getPassword()));
-        var userDTO = UserDTOBuilder.builder();
+        var userRequestDTO = UserRequestDTOBuilder.builder();
 
         when(repository.save(any(User.class))).thenReturn(user);
 
-        var userCreated = service.create(userDTO);
+        var userDTO = service.create(userRequestDTO);
 
-        assertThat(userCreated).isNotNull();
-        assertThat(userCreated.getId()).isNotNull().isEqualTo(1L);
-        assertThat(userCreated.getName()).isNotNull().isEqualTo("Some name");
-        assertThat(userCreated.getEmail()).isNotNull().isEqualTo("some_email@valid.com");
-        assertThat(userCreated.getCellphone()).isNotNull().isEqualTo("+5599999999999");
-        assertThat(userCreated.getUsername()).isNotNull().isEqualTo("Some username");
-        assertThat(userCreated.getPassword()).isNotNull().isEqualTo(CriptUtil.encript("some password"));
-
+        assertThat(userDTO).isNotNull();
+        assertThat(userDTO.getId()).isNotNull().isEqualTo(1L);
+        assertThat(userDTO.getName()).isNotNull().isEqualTo("Some name");
+        assertThat(userDTO.getEmail()).isNotNull().isEqualTo("some_email@valid.com");
+        assertThat(userDTO.getCellphone()).isNotNull().isEqualTo("+5599999999999");
+        assertThat(userDTO.getUsername()).isNotNull().isEqualTo("Some username");
     }
 
     @Test
@@ -55,13 +57,13 @@ class UserServiceTest extends UnitTestConfig {
         user.setEmail("other_email@email.valid");
         user.setPassword(CriptUtil.encript(user.getPassword()));
 
-        var userDTO = UserDTOBuilder.builder(1L);
-        userDTO.setEmail("other_email@email.valid");
+        var userRequestDTO = UserRequestDTOBuilder.builder(1L);
+        userRequestDTO.setEmail("other_email@email.valid");
 
         when(repository.save(any(User.class))).thenReturn(user);
         when(repository.findById(anyLong())).thenReturn(Optional.of(user));
 
-        var userCreated = service.update(1L, userDTO);
+        var userCreated = service.update(1L, userRequestDTO);
 
         assertThat(userCreated).isNotNull();
         assertThat(userCreated.getId()).isNotNull().isEqualTo(1L);
@@ -69,7 +71,6 @@ class UserServiceTest extends UnitTestConfig {
         assertThat(userCreated.getEmail()).isNotNull().isEqualTo("other_email@email.valid");
         assertThat(userCreated.getCellphone()).isNotNull().isEqualTo("+5599999999999");
         assertThat(userCreated.getUsername()).isNotNull().isEqualTo("Some username");
-        assertThat(userCreated.getPassword()).isNotNull().isEqualTo(CriptUtil.encript("some password"));
     }
 
     @Test
@@ -100,7 +101,6 @@ class UserServiceTest extends UnitTestConfig {
         assertThat(userFound.getEmail()).isNotNull().isEqualTo("some_email@valid.com");
         assertThat(userFound.getCellphone()).isNotNull().isEqualTo("+5599999999999");
         assertThat(userFound.getUsername()).isNotNull().isEqualTo("Some username");
-        assertThat(userFound.getPassword()).isNotNull().isEqualTo(CriptUtil.encript("some password"));
     }
 
     @Test
